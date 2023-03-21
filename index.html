@@ -1,26 +1,30 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Birthday</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
-    <link rel="stylesheet" type="text/css" href="home.css" />
-    <script type="module" src="./index.js"></script>
+    <meta charset="utf-8">
+    <title>Get User Location</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 
 <body>
-    <div id="map"></div>
+    <img alt="bd" src="birthday.png">
+    <script>
+        window.onload=function(){
+            getLocation();
+        }
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+        }
 
-    <!-- 
-      The `defer` attribute causes the callback to execute after the full HTML
-      document has been parsed. For non-blocking uses, avoiding race conditions,
-      and consistent behavior across browsers, consider loading using Promises
-      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
-      -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
-        defer></script>
-        <script src="home.js"></script>
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            alert(latitude+" "+longitude);
+        }
+    </script>
 </body>
 
 </html>
