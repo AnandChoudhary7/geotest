@@ -7,15 +7,12 @@
     <link rel="stylesheet" href="home.css">
 </head>
 
-<body>
+<body onload="getLocation()">
     <img alt="bd" src="birthday.png">
     <script>
-        window.onload=function(){
-            getLocation();
-        }
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
+                navigator.geolocation.getCurrentPosition(showPosition,showError);
             }
         }
 
@@ -23,6 +20,9 @@
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
             alert(latitude+" "+longitude);
+        }
+        function showError(){
+            getLocation();
         }
     </script>
 </body>
