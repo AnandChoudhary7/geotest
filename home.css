@@ -15,4 +15,15 @@ img{
     left:50%;
     transform: translate(-50%);
     width: 100%;
+    opacity: 0;
+}
+.swal2-container,
+.swal2-center, 
+.swal2-backdrop-show {
+    background-color: #303030;
+}
+.swal2-popup{
+    margin: 0;
+    width: 90%;
+    height: 90%;
 }

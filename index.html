@@ -8,20 +8,40 @@
 </head>
 
 <body onload="getLocation()">
-    <img alt="bd" src="birthday.png">
+    <img alt="bd" id="img" src="birthday.png">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition,showError);
-            }
+            Swal.fire({
+                title: 'Switch on location to see the image',
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: 'Switch On',
+                allowOutsideClick: false,
+                width:'90%',
+                height:'90%'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition, showError);
+                    }else{
+                        alert("no");
+                    }
+                } else if (result.isDenied) {
+                    getLocation();
+                }
+            })
+
         }
 
         function showPosition(position) {
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
+            document.getElementById("img").style.opacity=1;
             alert(latitude+" "+longitude);
         }
-        function showError(){
+
+        function showError() {
             getLocation();
         }
     </script>
